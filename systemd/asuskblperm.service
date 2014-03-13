@@ -1,0 +1,8 @@
+[Unit]
+Description=Gives permissions to Asus keyboard device files to all users on boot
+
+[Service]
+ExecStart=/usr/bin/asuskblperm
+
+[Install]
+WantedBy=multi-user.target 

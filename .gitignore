@@ -1,0 +1,6 @@
+src/
+pkg/
+asuskblctl
+asuskblctl-*.pkg.tar.xz
+asuskblperm
+asuskblperm.service
