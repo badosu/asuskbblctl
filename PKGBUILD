@@ -26,3 +26,5 @@ package() {
   install -Dm755 asuskblperm $pkgdir/usr/bin/asuskblperm
   install -Dm0644 asuskblperm.service "${pkgdir}/usr/lib/systemd/system/asuskblperm.service"
 }
+
+# vim: set ts=2 sw=2 et:
