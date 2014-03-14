@@ -15,11 +15,6 @@ sha256sums=(
   'b5afba03bded8470708a6caa1ee233b9e2e00595a01797305970230e956b5ce4'
   'f14eb94eecd14465bc670524d39d0f374ad145c134886ab0cfe68812d51bb28b')
 
-build() {
-  cd $srcdir
-  chmod +x asuskblctl asuskblperm
-}
-
 package() {
   cd $srcdir
   install -Dm755 asuskblctl $pkgdir/usr/bin/asuskblctl
