@@ -24,7 +24,7 @@ package() {
   cd $srcdir
   install -Dm755 asuskblctl $pkgdir/usr/bin/asuskblctl
   install -Dm755 asuskblperm $pkgdir/usr/bin/asuskblperm
-  install -Dm0644 asuskblperm.service "${pkgdir}/usr/lib/systemd/system/asuskblperm.service"
+  install -Dm644 asuskblperm.service "${pkgdir}$(pkg-config systemd --variable=systemdsystemunitdir)/asuskblperm.service"
 }
 
 # vim: set ts=2 sw=2 et:
