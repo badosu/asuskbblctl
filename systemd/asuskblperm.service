@@ -3,7 +3,7 @@ Description=Gives permissions to Asus keyboard device files to all users on boot
 After=systemd-udevd.service
 
 [Service]
-ExecStart=/usr/bin/asuskblperm
+ExecStart=/usr/bin/asuskblctl permissions
 
 [Install]
 WantedBy=multi-user.target 

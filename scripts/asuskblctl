@@ -1,12 +1,13 @@
 #!/bin/sh
 # asuskblctl v0.1
 #
-# Copyright (c) 2014, Amadeus FOlego <amadeusfolego@gmail.com>
+# Copyright (c) 2014, Amadeus Folego <amadeusfolego@gmail.com>
 # All rights reserved.
-
 backlights_path='/sys/class/leds/asus::kbd_backlight'
-max_brightness="$(< ${backlights_path}/max_brightness)"
-current_brightness="$(< ${backlights_path}/brightness)"
+brightness_file="${backlights_path}/brightness"
+max_brightness_file="${backlights_path}/max_brightness"
+max_brightness="$(< ${max_brightness_file})"
+current_brightness="$(< ${brightness_file})"
 
 adjust_brightness() {
   if [ "$1" -gt "${max_brightness}" ]; then
@@ -16,7 +17,21 @@ adjust_brightness() {
   else
     new_value="$1"
   fi
-  echo "${new_value}" | tee "${backlights_path}/brightness"
+  echo "${new_value}" | tee "${brightness_file}"
+}
+
+wait_for() {
+  max_tries=100
+
+  if [ ! -f $1 ]; then echo "Waiting for: $1"; fi
+
+  for n in $(seq 1 ${max_tries})
+  do
+    if [ -f $1 ]; then break; fi
+    printf "."
+    sleep 1
+  done
+  `$2`
 }
 
 printhelp() {
@@ -40,6 +55,9 @@ printhelp() {
 
   ${name} get
     get brightness value
+
+  ${name} permissions
+    get go+w permissions on the control files
 "
 }
 
@@ -65,6 +83,10 @@ case "$1" in
   ;;
   get)
     echo ${current_brightness}
+  ;;
+  permissions)
+    wait_for ${brightness_file} "chmod go+w ${brightness_file}"
+    wait_for ${max_brightness_file} "chmod go+r ${max_brightness_file}"
   ;;
   *)
     printhelp; exit 1

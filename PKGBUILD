@@ -8,17 +8,15 @@ url="https://github.com/badosu/asuskblctl"
 license=('GPL')
 source=(
   https://github.com/badosu/asuskblctl/raw/master/scripts/asuskblctl
-  https://github.com/badosu/asuskblctl/raw/master/scripts/asuskblperm
   https://github.com/badosu/asuskblctl/raw/master/systemd/asuskblperm.service)
 sha256sums=(
-  '52f3882e81de0a1c3d60d3b0e9600d76e2ae493e4bdbd7cd8b2e7210f99f983c'
-  'b5afba03bded8470708a6caa1ee233b9e2e00595a01797305970230e956b5ce4'
-  'ea85675157d9304e866128520db5d403a8043daa2ad105d4ce5e61bb11573786')
+  '9840573cb17745ff87c4ab1e71b57d450e7232a67b4928108979e2c8690923f6'
+  'ba36966ecb74b083c4be455250d808fe9978779489c15814fa1d09798f3ae758'
+)
 
 package() {
   cd $srcdir
   install -Dm755 asuskblctl $pkgdir/usr/bin/asuskblctl
-  install -Dm755 asuskblperm $pkgdir/usr/bin/asuskblperm
   install -Dm644 asuskblperm.service "${pkgdir}$(pkg-config systemd --variable=systemdsystemunitdir)/asuskblperm.service"
 }
 
